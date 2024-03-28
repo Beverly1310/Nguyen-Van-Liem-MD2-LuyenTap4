@@ -92,17 +92,7 @@ public class DepartmentImplement implements IDepartment {
     public void searchDepartmentByName(Scanner scanner) {
         System.out.println("Nhập tên của phòng ban");
         String nameDepartment = scanner.nextLine();
-        boolean isExist = false;
-        for (int i = 0; i < listDepartment.size(); i++) {
-            if (listDepartment.get(i).getName().equals(nameDepartment)) {
-                listDepartment.get(i).displayData();
-                isExist=true;
-                break;
-            }
-        }
-        if (!isExist){
-            System.err.println("Phòng ban không tồn tại");
-        }
+        listDepartment.stream().filter(department -> department.getName().equals(nameDepartment)).forEach(Department::displayData);
     }
 
 

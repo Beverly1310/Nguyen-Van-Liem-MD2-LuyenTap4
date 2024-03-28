@@ -77,10 +77,7 @@ public class EmployeeImplement implements IEmployee {
             }
         }
         while (true);
-
-
     }
-
 
     @Override
     public void updateData(Scanner scanner) {
@@ -117,42 +114,14 @@ public class EmployeeImplement implements IEmployee {
     public void findEmployeeByName(Scanner scanner) {
         System.out.println("Nhập tên nhân viên cần tìm kiếm: ");
         String inputEmployeeName = scanner.nextLine();
-        boolean isExist = false;
-        for (int i = 0; i < listEmployee.size(); i++) {
-            if (listEmployee.get(i).getFullName().equals(inputEmployeeName)) {
-                listEmployee.get(i).displayData();
-                isExist = true;
-                break;
-            }
-        }
-        if (!isExist) {
-            System.out.println("Nhân viên không tồn tại");
-        }
+        listEmployee.stream().filter(employee -> employee.getFullName().equals(inputEmployeeName)).forEach(Employee::displayData);
     }
 
     @Override
     public void findEmployeeByDepartMent(Scanner scanner) {
         System.out.println("Nhập tên phòng ban: ");
         String inputDepartmentName = scanner.nextLine();
-        boolean isExist = false;
-        boolean isExistEmployee = false;
-        for (int i = 0; i < listDepartment.size(); i++) {
-            if (inputDepartmentName.equals(listEmployee.get(i).getDepartment().getName())) {
-                isExist = true;
-                break;
-            }
-        }
-        if (isExist) {
-            for (int j = 0; j < listEmployee.size(); j++) {
-                if (listEmployee.get(j).getDepartment().getName().equals(inputDepartmentName)) {
-                    listEmployee.get(j).displayData();
-                    isExistEmployee = true;
-                }
-            }
-            if (!isExistEmployee) {
-                System.out.println("Phòng ban không có nhân viên nào");
-            }
-        }
+        listEmployee.stream().filter(employee -> employee.getDepartment().getName().equals(inputDepartmentName)).forEach(Employee::displayData);
     }
 
     @Override
