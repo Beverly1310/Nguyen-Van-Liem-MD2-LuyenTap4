@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class DepartmentImplement implements IDepartment {
     public static List<Department> listDepartment = new ArrayList<>();
-
+// tạo mới phòng bab
     @Override
     public void createData(Scanner scanner) {
         System.out.println("Nhập số phòng ban muốn thêm:");
@@ -22,7 +22,7 @@ public class DepartmentImplement implements IDepartment {
             listDepartment.add(newDepartment);
         }
     }
-
+//in ra danh sách phòng ban
     @Override
     public void readData(Scanner scanner) {
         System.out.println("Danh sách phòng ban: ");
@@ -30,7 +30,7 @@ public class DepartmentImplement implements IDepartment {
             listDepartment.get(i).displayData();
         }
     }
-
+// cập nhật
     @Override
     public void updateData(Scanner scanner) {
         readData(scanner);
@@ -64,7 +64,7 @@ public class DepartmentImplement implements IDepartment {
             System.err.println("Không tìm thấy phòng ban");
         }
     }
-
+// xóa
     @Override
     public void deleteData(Scanner scanner) {
         readData(scanner);
@@ -75,7 +75,7 @@ public class DepartmentImplement implements IDepartment {
             System.err.println("Phòng ban không tồn tại");
         }
     }
-
+// đổi trạng thái
     @Override
     public void changeStatus(Scanner scanner) {
         readData(scanner);
@@ -87,14 +87,14 @@ public class DepartmentImplement implements IDepartment {
             System.err.println("Phòng ban không tồn tại");
         }
     }
-
+// tìm bằng tên
     @Override
     public void searchDepartmentByName(Scanner scanner) {
         System.out.println("Nhập tên của phòng ban");
         String nameDepartment = scanner.nextLine();
         listDepartment.stream().filter(department -> department.getName().equals(nameDepartment)).forEach(Department::displayData);
     }
-
+// tìm index bằng id
 
     @Override
     public int findIndexById(Scanner scanner) {
