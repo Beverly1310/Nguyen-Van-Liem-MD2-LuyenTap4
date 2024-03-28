@@ -119,9 +119,9 @@ public class EmployeeImplement implements IEmployee {
 
     @Override
     public void findEmployeeByDepartMent(Scanner scanner) {
-        System.out.println("Nhập tên phòng ban: ");
-        String inputDepartmentName = scanner.nextLine();
-        listEmployee.stream().filter(employee -> employee.getDepartment().getName().equals(inputDepartmentName)).forEach(Employee::displayData);
+        System.out.println("Nhập mã phòng ban: ");
+        int inputDepartmentId = Integer.parseInt(scanner.nextLine());
+        listEmployee.stream().filter(employee -> employee.getDepartment().getId()==inputDepartmentId).forEach(Employee::displayData);
     }
 
     @Override
