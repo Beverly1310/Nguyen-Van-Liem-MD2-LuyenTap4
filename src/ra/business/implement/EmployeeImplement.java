@@ -12,7 +12,8 @@ import static ra.business.implement.DepartmentImplement.listDepartment;
 
 public class EmployeeImplement implements IEmployee {
     public static List<Employee> listEmployee = new ArrayList<>();
-// tạo mới n nhân viên
+
+    // tạo mới n nhân viên
     @Override
     public void createData(Scanner scanner) {
         System.out.println("Nhập số nhân viên muốn thêm: ");
@@ -24,7 +25,8 @@ public class EmployeeImplement implements IEmployee {
             listEmployee.add(newEmployee);
         }
     }
-// in ra nhân viên
+
+    // in ra nhân viên
     @Override
     public void readData(Scanner scanner) {
         int firstIndexOfPage = 0;
@@ -60,15 +62,19 @@ public class EmployeeImplement implements IEmployee {
             int choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
-                    firstIndexOfPage -= elementPerPage;
-                    lastIndexOfPage -= elementPerPage;
-                    page -= 1;
-                    break;
+                    if (page <= numberOfPage && page >= 0) {
+                        firstIndexOfPage -= elementPerPage;
+                        lastIndexOfPage -= elementPerPage;
+                        page -= 1;
+                        break;
+                    }
                 case 2:
-                    firstIndexOfPage += elementPerPage;
-                    lastIndexOfPage += elementPerPage;
-                    page += 1;
-                    break;
+                    if (page <= numberOfPage && page >= 0) {
+                        firstIndexOfPage += elementPerPage;
+                        lastIndexOfPage += elementPerPage;
+                        page += 1;
+                        break;
+                    }
                 case 3:
                     return;
                 default:
@@ -78,7 +84,8 @@ public class EmployeeImplement implements IEmployee {
         }
         while (true);
     }
-// cập nhật
+
+    // cập nhật
     @Override
     public void updateData(Scanner scanner) {
         readData(scanner);
@@ -91,7 +98,8 @@ public class EmployeeImplement implements IEmployee {
             System.out.println("Nhân viên không tồn ");
         }
     }
-// xóa
+
+    // xóa
     @Override
     public void deleteData(Scanner scanner) {
         readData(scanner);
@@ -102,28 +110,32 @@ public class EmployeeImplement implements IEmployee {
             System.out.println("Nhân viên không tồn tại");
         }
     }
-// đổi trạng thái
+
+    // đổi trạng thái
     @Override
     public void changeStatus(Scanner scanner) {
         readData(scanner);
         int indexEmployee = findIndexById(scanner);
         listEmployee.get(indexEmployee).setStatus(!listEmployee.get(indexEmployee).isStatus());
     }
-// tìm bằng tên
+
+    // tìm bằng tên
     @Override
     public void findEmployeeByName(Scanner scanner) {
         System.out.println("Nhập tên nhân viên cần tìm kiếm: ");
         String inputEmployeeName = scanner.nextLine();
         listEmployee.stream().filter(employee -> employee.getFullName().equals(inputEmployeeName)).forEach(Employee::displayData);
     }
-// tìm bằng mã phòng ban
+
+    // tìm bằng mã phòng ban
     @Override
     public void findEmployeeByDepartMent(Scanner scanner) {
         System.out.println("Nhập mã phòng ban: ");
         int inputDepartmentId = Integer.parseInt(scanner.nextLine());
-        listEmployee.stream().filter(employee -> employee.getDepartment().getId()==inputDepartmentId).forEach(Employee::displayData);
+        listEmployee.stream().filter(employee -> employee.getDepartment().getId() == inputDepartmentId).forEach(Employee::displayData);
     }
-// sx theo tên
+
+    // sx theo tên
     @Override
     public void sortByName(Scanner scanner) {
         listEmployee = listEmployee.stream().sorted((o1, o2) -> {
@@ -131,7 +143,8 @@ public class EmployeeImplement implements IEmployee {
         }).toList();
         readData(scanner);
     }
-// tìm index bằng tên
+
+    // tìm index bằng tên
     @Override
     public int findIndexById(Scanner scanner) {
         System.out.println("Nhập Id của nhân viên");
